@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<form method="POST" action="process.php">
+    <label for="category">Category:</label>
+    <select name="Category">
+        <?php 
+
+        include 'fetch_categories.php';
+            // use a while loop to fetch data 
+            // from the $all_categories variable 
+            // and individually display as an option
+            while ($category = mysqli_fetch_array(
+                    $all_categories,MYSQLI_ASSOC)):; 
+        ?>
+            <option value="<?php echo $category["Category_ID"];
+                // The value we usually set is the primary key
+            ?>">
+                <?php echo $category["Category_Name"];
+                    // To show the category name to the user
+                ?>
+            </option>
+        <?php 
+            endwhile; 
+            // While loop must be terminated
+        ?>
+    </select>
+
+    <label for="pwd">Password:</label>
+    <input type="password" id="pwd" placeholder="Enter password" name="pswd">
+    <label>
+      <input type="checkbox" name="remember"> Remember me
+    </label>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
